@@ -54,13 +54,13 @@ aggiungiElemento.addEventListener("click", function () {
 function addListaSpesa(index, value) {
     let listaChild = document.createElement("li")
     listaChild.id = "elementoLista" + index;
-    listaChild.className = "mr-2";
+    listaChild.className = "list-group-item d-flex justify-content-between align-items-center";
     contenitoreListaSpesa.appendChild(listaChild);
     listaChild.innerHTML = value;
 
     let bottoneChild = document.createElement("button");
     bottoneChild.id = "RemoveSelf-" + index;
-    bottoneChild.className = "btn btn-primary";
+    bottoneChild.className = "badge bg-primary rounded-pill";
     listaChild.appendChild(bottoneChild);
     bottoneChild.innerHTML = "Remove";
     bottoneChild.addEventListener("click", removeElement);
