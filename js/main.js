@@ -25,29 +25,54 @@ do{
 }while(i<arrayListaSpesa.length);
 ----------------------------------------------------------------*/
 
-let contenitoreListaSpesa=document.getElementById("listaSpesa");
-let i=0;
+let contenitoreListaSpesa = document.getElementById("listaSpesa");
+let arrayListaSpesa = ["3x latte", "Spaghetti", "Acqua naturale", "Cibo per cani"];
+let elementoUtente = document.getElementById("elementoUtente");
+let aggiungiElemento = document.getElementById("AggiungeElemento");
 
-let arrayListaSpesa=["3x latte","Spaghetti","Acqua naturale","Cibo per cani"];
+loadListaSpesa();
 
-do{
-    contenitoreListaSpesa.innerHTML += '<li id="elementoLista'+i+'" class="mr-2">'+arrayListaSpesa[i]+'<button type="button" class="btn btn-primary " id="RemoveSelf'+i+'">Rimuovi</button></li>';
-    i++;
-}while(i<arrayListaSpesa.length);
+//funzione per caricare l'array su html.
+
+function loadListaSpesa() {
+    let i = 0;
+    do {
+        addListaSpesa(i, arrayListaSpesa[i]);
+        i++;
+    } while (i < arrayListaSpesa.length)
+}
 
 
-for(let j=0;j<arrayListaSpesa.length;j++){
-   let removeSelf=document.getElementById("RemoveSelf"+j);
-   let listaelemento=document.getElementById("elementoLista"+j);
-    console.log(removeSelf);
-    removeSelf.addEventListener("click", function(){
-        listaelemento.remove();
-    });
+aggiungiElemento.addEventListener("click", function () {
+    arrayListaSpesa.push(elementoUtente.value);
+    console.log(arrayListaSpesa);
+    addListaSpesa(contenitoreListaSpesa.childElementCount, elementoUtente.value);
+})
+
+//funzione per aggiungere su html un nuovo elemento.
+
+function addListaSpesa(index, value) {
+    let listaChild = document.createElement("li")
+    listaChild.id = "elementoLista" + index;
+    listaChild.className = "mr-2";
+    contenitoreListaSpesa.appendChild(listaChild);
+    listaChild.innerHTML = value;
+
+    let bottoneChild = document.createElement("button");
+    bottoneChild.id = "RemoveSelf-" + index;
+    bottoneChild.className = "btn btn-primary";
+    listaChild.appendChild(bottoneChild);
+    bottoneChild.innerHTML = "Remove";
+    bottoneChild.addEventListener("click", removeElement);
 
 }
 
-/*let lista=document.getElementById("AggiungeElemento");
+//funzione per rimuovere l'elemento e aggiornare l'array.
 
-function aggiungiElemento(){
-    lista.innerHTML+='<li>3x latte<button type="button" class="btn btn-primary" onClick=rimuoviElemento()>Rimuovi</button></li>';
-}*/
+function removeElement(Elemento) {
+    console.log(Elemento.currentTarget.parentNode.innerText);
+    let valore = Elemento.currentTarget.parentNode.innerText.replace("Remove", '');
+    arrayListaSpesa.splice(arrayListaSpesa.indexOf(valore), 1);
+    Elemento.currentTarget.parentNode.remove();
+    console.log(arrayListaSpesa);
+}
