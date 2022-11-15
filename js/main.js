@@ -8,3 +8,12 @@ Bonus:
 Aggiungere alla pagina un campo di input testuale e un pulsante “aggiungi”: l’utente inserisce nell’input un prodotto da acquistare e quando clicca sul pulsante, il testo viene aggiunto alla lista.
 Super Bonus:
 Aggiungere a fianco ad ogni elemento della lista un pulsante “elimina”: quando l’utente clicca su uno di questi pulsanti, l’elemento corrispondente viene rimosso dalla lista*/
+
+let lista=document.getElementById("AggiungeElemento");
+
+function aggiungiElemento(){
+    lista.innerHTML+="<li>primo elemento</li>";
+}
+function rimuoviElemento(){
+    lista.innerHTML="";
+}
